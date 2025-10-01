@@ -1,0 +1,8 @@
+.card-img { width: 100%; height: auto; border-radius: .5rem; object-fit: cover; }
+.card-fallback { width: 100%; aspect-ratio: 2 / 3; background: #262626; border-radius: .5rem; }
+.card-meta { margin-top: .5rem; display: flex; align-items: center; justify-content: space-between; }
+.card-title { font-size: .875rem; font-weight: 600; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card-badge { font-size: .75rem; color: #d4d4d4; }
+.fav-btn { position: absolute; top: .5rem; right: .5rem; background: rgba(0,0,0,.6); color: #fff; padding: .25rem .5rem; font-size: .75rem; border-radius: 9999px; opacity: 0; transition: opacity .2s ease; }
+.group:hover .fav-btn { opacity: 1; }
+
