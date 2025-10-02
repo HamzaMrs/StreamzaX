@@ -18,7 +18,6 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* Hero Section */}
       {heroMovie && !isSearching && (
         <HeroSection
           title={heroMovie.title}
@@ -29,13 +28,11 @@ export default function Home() {
       )}
 
       <div className="px-6 py-6 space-y-6">
-        {/* Search */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           <div className="flex-1" />
           <MovieSearch query={query} setQuery={setQuery} />
         </div>
 
-        {/* Search Results */}
         {isSearching && (
           <>
             {search.loading && <p>Chargement...</p>}
@@ -44,26 +41,18 @@ export default function Home() {
           </>
         )}
 
-        {/* Movie Sections */}
         {!isSearching && (
           <div id="sections">
-            {trending.data && (
-              <MovieSection
-                title="🔥 Tendances"
-                movies={trending.data.results}
-                linkTo="/trending"
-              />
-            )}
             {popular.data && (
               <MovieSection
-                title="⭐ Populaires"
+                title="Populaires"
                 movies={popular.data.results}
                 linkTo="/popular"
               />
             )}
             {topRated.data && (
               <MovieSection
-                title="🏆 Mieux notés"
+                title="Mieux notés"
                 movies={topRated.data.results}
                 linkTo="/top-rated"
               />
