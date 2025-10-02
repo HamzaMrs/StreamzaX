@@ -1,15 +1,18 @@
 import React from 'react'
+import './MovieSearch.css'
 
 export default function MovieSearch({ query, setQuery }) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="search" role="search">
+      <label htmlFor="search-input" className="sr-only">Rechercher un film</label>
       <input
+        id="search-input"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Rechercher un film..."
-        className="w-full sm:w-80 rounded-md bg-neutral-900 border border-neutral-700 px-3 py-2 text-sm outline-none focus:border-neutral-500"
+        aria-label="Rechercher un film"
       />
-      <button onClick={() => setQuery('')} className="text-sm text-neutral-300">Effacer</button>
+      <button onClick={() => setQuery('')}>Effacer</button>
     </div>
   )
 }

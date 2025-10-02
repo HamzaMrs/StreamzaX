@@ -15,6 +15,22 @@ export async function getTrendingMovies(page = 1) {
   return request(`/trending/movie/week?page=${page}`);
 }
 
+export async function getPopularMovies(page = 1) {
+  return request(`/movie/popular?page=${page}`);
+}
+
+export async function getTopRatedMovies(page = 1) {
+  return request(`/movie/top_rated?page=${page}`);
+}
+
+export async function getNowPlayingMovies(page = 1) {
+  return request(`/movie/now_playing?page=${page}`);
+}
+
+export async function getUpcomingMovies(page = 1) {
+  return request(`/movie/upcoming?page=${page}`);
+}
+
 export async function searchMovies(query, page = 1) {
   const encoded = encodeURIComponent(query);
   return request(`/search/movie?query=${encoded}&page=${page}&include_adult=false`);
@@ -22,4 +38,12 @@ export async function searchMovies(query, page = 1) {
 
 export async function getMovieDetail(id) {
   return request(`/movie/${id}`);
+}
+
+export async function getGenres() {
+  return request('/genre/movie/list');
+}
+
+export async function getMoviesByGenre(genreId, page = 1) {
+  return request(`/discover/movie?with_genres=${genreId}&page=${page}`);
 }

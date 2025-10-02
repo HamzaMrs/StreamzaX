@@ -1,26 +1,75 @@
 import React, { useState } from 'react'
 import Layout from '../components/layout/Layout.jsx'
+import HeroSection from '../components/layout/HeroSection.jsx'
 import MovieSearch from '../components/movies/MovieSearch.jsx'
+import MovieSection from '../components/movies/MovieSection.jsx'
 import MovieGrid from '../components/movies/MovieGrid.jsx'
-import { useTrending, useSearch } from '../hooks/useMovies.js'
+import { useSearch } from '../hooks/useMovies.js'
+import { useMultipleMovies } from '../hooks/useMultipleMovies.js'
+import { getImageUrl } from '../utils/helpers.js'
 
 export default function Home() {
   const [query, setQuery] = useState('')
-  const trending = useTrending(1)
   const search = useSearch(query, 1)
+  const { trending, popular, topRated } = useMultipleMovies()
+  
   const isSearching = query.trim().length > 0
-  const state = isSearching ? search : trending
+  const heroMovie = trending.data?.results?.[0]
 
   return (
     <Layout>
+      {/* Hero Section */}
+      {heroMovie && !isSearching && (
+        <HeroSection
+          title={heroMovie.title}
+          overview={heroMovie.overview}
+          backdropUrl={getImageUrl(heroMovie.backdrop_path, 'w780')}
+          movieId={heroMovie.id}
+        />
+      )}
+
       <div className="px-6 py-6 space-y-6">
+        {/* Search */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           <div className="flex-1" />
           <MovieSearch query={query} setQuery={setQuery} />
         </div>
-        {state.loading && <p>Chargement...</p>}
-        {state.error && <p className="text-red-400">Erreur: {state.error}</p>}
-        {state.data && <MovieGrid movies={state.data.results} />}
+
+        {/* Search Results */}
+        {isSearching && (
+          <>
+            {search.loading && <p>Chargement...</p>}
+            {search.error && <p className="text-red-400">Erreur: {search.error}</p>}
+            {search.data && <MovieGrid movies={search.data.results} />}
+          </>
+        )}
+
+        {/* Movie Sections */}
+        {!isSearching && (
+          <div id="sections">
+            {trending.data && (
+              <MovieSection
+                title="🔥 Tendances"
+                movies={trending.data.results}
+                linkTo="/trending"
+              />
+            )}
+            {popular.data && (
+              <MovieSection
+                title="⭐ Populaires"
+                movies={popular.data.results}
+                linkTo="/popular"
+              />
+            )}
+            {topRated.data && (
+              <MovieSection
+                title="🏆 Mieux notés"
+                movies={topRated.data.results}
+                linkTo="/top-rated"
+              />
+            )}
+          </div>
+        )}
       </div>
     </Layout>
   )

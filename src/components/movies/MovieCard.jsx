@@ -8,7 +8,7 @@ export default function MovieCard({ movie }) {
   const { toggleFavorite, isFavorite } = useFavorites()
   const poster = getImageUrl(movie.poster_path, 'w342')
   return (
-    <div className="group" style={{ position: 'relative' }}>
+    <div className="movie-card">
       <Link to={`/movie/${movie.id}`}>
         {poster ? (
           <img src={poster} alt={movie.title} className="card-img" loading="lazy" />
@@ -21,7 +21,7 @@ export default function MovieCard({ movie }) {
         <span className="card-badge">★ {formatVoteAverage(movie.vote_average)}</span>
       </div>
       <button aria-label="toggle-favorite" onClick={() => toggleFavorite(movie.id)} className="fav-btn">
-        {isFavorite(movie.id) ? '♥' : '♡'}
+        {isFavorite(movie.id) ? '❤️' : '🤍'}
       </button>
     </div>
   )
