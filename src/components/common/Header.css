@@ -6,16 +6,18 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
-  background: rgba(15, 15, 35, 0.95);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 4px 20px var(--shadow);
+  background: linear-gradient(180deg, rgba(12,12,30,0.8), rgba(10,10,20,0.6));
+  backdrop-filter: blur(14px) saturate(120%);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+  transform: translateZ(0);
+  transition: transform var(--anim-duration) var(--easing-standard), box-shadow var(--anim-duration) var(--easing-standard);
 }
 
 .header-left .brand {
   font-size: 1.75rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+  background: linear-gradient(90deg, #8b5cf6, #06b6d4 60%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -41,7 +43,7 @@
 .header-nav a {
   color: var(--text-secondary);
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
@@ -76,6 +78,8 @@
   align-items: center;
   gap: 1rem;
 }
+
+.header:hover { transform: translateY(-3px); }
 
 .authBtn {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));

@@ -6,11 +6,12 @@
   border: 1px solid var(--border);
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transform-origin: center center;
 }
 
 .movie-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.22);
   border-color: var(--primary);
 }
 
@@ -41,6 +42,23 @@
 .card-fallback::before {
   content: '🎬';
 }
+
+.card-media { position: relative; cursor: pointer; }
+
+.card-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.45) 100%);
+  opacity: 0;
+  transition: opacity var(--anim-duration) var(--easing-standard), transform var(--anim-duration) var(--easing-standard);
+}
+
+.card-media:hover .card-play-overlay { opacity: 1; transform: scale(1.02); }
+
+.card-play-overlay svg { color: #fff; filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6)); }
 
 .card-meta { 
   padding: 1rem;

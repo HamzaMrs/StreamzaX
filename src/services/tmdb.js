@@ -40,6 +40,10 @@ export async function getMovieDetail(id) {
   return request(`/movie/${id}`);
 }
 
+export async function getMovieVideos(id) {
+  return request(`/movie/${id}/videos`);
+}
+
 export async function getGenres() {
   return request('/genre/movie/list');
 }

@@ -15,7 +15,6 @@ export default function Header({ user, onLogin, onLogout }) {
          <Link to="/top-rated">Mieux notés</Link>
          <Link to="/now-playing">Au cinéma</Link>
          <Link to="/upcoming">Prochainement</Link>
-         <Link to="/search">Recherche</Link>
          <Link to="/favorites">Favoris</Link>
        </nav>
 
@@ -25,9 +24,7 @@ export default function Header({ user, onLogin, onLogout }) {
             <span className="user">Bonjour, {user}</span>
             <button className="authBtn" onClick={onLogout}>Se déconnecter</button>
           </>
-        ) : (
-          <button className="authBtn" onClick={onLogin}>Se connecter</button>
-        )}
+        ) : null}
       </div>
     </header>
   );
