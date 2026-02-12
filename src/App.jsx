@@ -1,31 +1,41 @@
+
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import './App.css'
 import { ThemeProvider } from './context/ThemeContext.jsx'
-import { AuthProvider, useAuth } from './context/AuthContext.jsx'
+import { AuthProvider } from './context/AuthContext.jsx'
 import { FavoritesProvider } from './context/FavoritesContext.jsx'
 
-import Header from './components/common/Header.jsx'
-
-function HeaderContainer() {
-  const { user, login, logout } = useAuth()
-  return (
-    <>
-      <a href="#main" className="sr-only">Aller au contenu</a>
-      <Header user={user?.name || null} onLogin={() => login('Invité')} onLogout={logout} />
-    </>
-  )
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false, error: null }
+  }
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error }
+  }
+  componentDidCatch(error, info) {
+    // log error if needed
+  }
+  render() {
+    if (this.state.hasError) {
+      return <div style={{color: 'red', padding: 32, fontSize: 20}}>Une erreur est survenue : {String(this.state.error)}</div>
+    }
+    return this.props.children
+  }
 }
 
 export default function App() {
   return (
-    <AuthProvider>
-      <ThemeProvider>
-        <FavoritesProvider>
-          <Outlet /> 
-        </FavoritesProvider>
-      </ThemeProvider>
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <ThemeProvider>
+          <FavoritesProvider>
+            <Outlet />
+          </FavoritesProvider>
+        </ThemeProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   )
 }
 

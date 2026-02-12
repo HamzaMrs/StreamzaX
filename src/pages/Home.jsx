@@ -37,26 +37,27 @@ export default function Home() {
           <>
             {search.loading && <p>Chargement...</p>}
             {search.error && <p className="text-red-400">Erreur: {search.error}</p>}
-            {search.data && <MovieGrid movies={search.data.results} />}
+            {search.data && search.data.results.length === 0 && <p>Aucun film trouvé.</p>}
+            {search.data && search.data.results.length > 0 && <MovieGrid movies={search.data.results} />}
           </>
         )}
 
         {!isSearching && (
           <div id="sections">
-            {popular.data && (
+            {popular.data && popular.data.results.length > 0 ? (
               <MovieSection
                 title="Populaires"
                 movies={popular.data.results}
                 linkTo="/popular"
               />
-            )}
-            {topRated.data && (
+            ) : <p>Aucun film populaire trouvé.</p>}
+            {topRated.data && topRated.data.results.length > 0 ? (
               <MovieSection
                 title="Mieux notés"
                 movies={topRated.data.results}
                 linkTo="/top-rated"
               />
-            )}
+            ) : <p>Aucun film mieux noté trouvé.</p>}
           </div>
         )}
       </div>
